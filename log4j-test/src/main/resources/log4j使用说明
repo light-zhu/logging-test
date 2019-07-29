@@ -1,0 +1,61 @@
+1. Apache的开源项目log4j是一个功能强大的日志组件,提供方便的日志记录
+
+2. Log4j由三个重要的组件构成：日志信息的优先级，日志信息的输出目的地，日志信息的输出格式。
+    日志信息的优先级从高到低有ERROR、WARN、 INFO、DEBUG，分别用来指定这条日志信息的重要程度；
+    日志信息的输出目的地指定了日志将打印到控制台还是文件中；
+    输出格式则控制了日志信息的显示内容；
+
+3.  Log4j支持两种配置文件格式，一种是XML格式的文件，一种是Java特性文件（键=值）
+
+4.  Log4J采用类似C语言中的printf函数的打印格式格式化日志信息，打印参数如下： %m 输出代码中指定的消息
+
+    %p 输出优先级，即DEBUG，INFO，WARN，ERROR，FATAL
+    %r 输出自应用启动到输出该log信息耗费的毫秒数
+    %c 输出所属的类目，通常就是所在类的全名
+    %t 输出产生该日志事件的线程名
+    %n 输出一个回车换行符，Windows平台为“rn”，Unix平台为“n”
+    %d 输出日志时间点的日期或时间，默认格式为ISO8601，也可以在其后指定格式，比如：%d{yyyy MMM dd HH:mm:ss,SSS}，输出类似：2002年10月18日 22：10：28，921
+    %l 输出日志事件的发生位置，包括类目名、发生的线程，以及在代码中的行数。举例：Testlog4.main(TestLog4.java:10)
+
+5. log4j.appender.appenderName.option中option应替换的属性/选项
+
+
+　　5.1.ConsoleAppender控制台选项
+
+　　　　Threshold=DEBUG:指定日志消息的输出最低层次。
+　　　　ImmediateFlush=true:默认值是true,意味着所有的消息都会被立即输出。
+　　　　Target=System.err：默认情况下是：System.out,指定输出控制台
+
+　　5.2.FileAppender 文件选项
+
+　　　　Threshold=DEBUF:指定日志消息的输出最低层次。
+　　　　ImmediateFlush=true:默认值是true,意谓着所有的消息都会被立即输出。
+　　　　File=mylog.txt:指定消息输出到mylog.txt文件。
+　　　　Append=false:默认值是true,即将消息增加到指定文件中，false指将消息覆盖指定的文件内容。
+
+　　5.3.RollingFileAppender 每天生成一个文件选项
+
+　　　　Threshold=DEBUG:指定日志消息的输出最低层次。
+　　　　ImmediateFlush=true:默认值是true,意谓着所有的消息都会被立即输出。
+　　　　File=mylog.txt:指定消息输出到mylog.txt文件。
+　　　　Append=false:默认值是true,即将消息增加到指定文件中，false指将消息覆盖指定的文件内容。
+　　　　MaxFileSize=100KB: 后缀可以是KB, MB 或者是 GB. 在日志文件到达该大小时，将会自动滚动，即将原来的内容移到mylog.log.1文件。
+　　　　MaxBackupIndex=2:指定可以产生的滚动文件的最大数。
+
+6.Log4j提供的appender有以下几种：
+
+    org.apache.log4j.ConsoleAppender（控制台），
+    org.apache.log4j.FileAppender（文件），
+    org.apache.log4j.DailyRollingFileAppender（每天产生一个日志文件），
+    org.apache.log4j.RollingFileAppender（文件大小到达指定尺寸的时候产生一个新的文件），
+    org.apache.log4j.WriterAppender（将日志信息以流格式发送到任意指定的地方
+
+7.Log4j提供的layout有以e几种：
+
+  org.apache.log4j.HTMLLayout（以HTML表格形式布局），
+  org.apache.log4j.PatternLayout（可以灵活地指定布局模式）， 常用
+  org.apache.log4j.SimpleLayout（包含日志信息的级别和信息字符串），
+  org.apache.log4j.TTCCLayout（包含日志产生的时间、线程、类别等等信息）
+
+
+8.

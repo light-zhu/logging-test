@@ -1,0 +1,34 @@
+1. Logback是由log4j创始人设计的又一个开源日志组件。
+
+    logback当前分成三个模块：logback-core、logback- classic和logback-access。
+
+    logback-core：是其它两个模块的基础模块。
+
+    logback-classic：是log4j的一个 改良版本。此外logback-classic完整实现SLF4J API使你可以很方便地更换成其它日志系统如log4j或JDK14 Logging。
+
+    logback-access：访问模块与Servlet容器集成提供通过Http来访问日志的功能。
+
+2. Spring Boot 官方推荐优先使用带有-spring的文件名作为你的日志配置（如使用logback-spring.xml，而不是logback.xml），命名为logback-spring.xml的日志配置文件，spring boot可以为它添加一些 spring boot特有的配置项
+
+
+3.多环境日志输出
+  根据不同环境（prod:生产环境，test:测试环境，dev:开发环境）来定义不同的日志输出，在 logback-spring.xml中使用 springProfile 节点来定义，方法如下：
+
+  文件名称不是 logback.xml，想使用spring扩展profile支持，要以logback-spring.xml 命名
+    <!-- 生产环境生效 -->
+	<springProfile name="prod">
+		<root level="error">
+			<appender-ref ref="STDOUT" />
+			<appender-ref ref="FILE" />
+		</root>
+	</springProfile>
+
+
+	<!-- 测试和开发环境日志级别为INFO/并且记录日志文件 -->
+	<springProfile name="dev,test">
+		<!-- 日志输出级别 -->
+		<root level="INFO">
+			<appender-ref ref="STDOUT" />
+			<appender-ref ref="FILE" />
+		</root>
+	</springProfile>
